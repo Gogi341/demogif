@@ -55,7 +55,7 @@ public class GifController {
     @GetMapping("/gif/{name}") // "/gif" oznacza, że jest podstroną to gif, a "{name}" to nazwa mema
 
     public String gifDetails (@PathVariable String name, ModelMap modelMap){
-        //"@PathVariable" łączy "name" mappingu do "name" z metody"
+        //"@PathVariable" łączy "name" mappingu z url do "name" z metody
         //"ModelMap modelMap" używamy by powiązać frontend z backendem
 
         //1. Wyciąganie gifów

@@ -17,6 +17,9 @@ public class Gif {
     @Getter
     private Boolean favorite;
 
+    @Getter
+    private int categoryId;
+
 //    @Override
 //    public String toString() {
 //        return "name='" + name + '\'' +
