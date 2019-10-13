@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
@@ -35,6 +36,37 @@ public class GifController {
 
         //3. Zwracanie nazwy widoku
         return "home";
+    }
+
+    @GetMapping("/favorites") // "/favorites" oznacza, że jest podstroną favorites
+
+    public String listFavoriteGifs (ModelMap modelMap){ //"ModelMap modelMap" używamy by powiązać frontend z backendem
+        //1. Wyciąganie gifów
+
+        List<Gif> gifList = gifRepository.getFavoriteGifs();
+
+        //2. Przekazywanie gifa do View
+        modelMap.put("gifs", gifList); // tu dokonaliśmy mapowania, na frontendzie szukamy $ - on zaznacza pobierane dane z BackEnd, dlatego wpisujemy "gifs" do mapy
+
+        //3. Zwracanie nazwy widoku
+        return "favorites";
+    }
+
+    @GetMapping("/gif/{name}") // "/gif" oznacza, że jest podstroną to gif, a "{name}" to nazwa mema
+
+    public String gifDetails (@PathVariable String name, ModelMap modelMap){
+        //"@PathVariable" łączy "name" mappingu do "name" z metody"
+        //"ModelMap modelMap" używamy by powiązać frontend z backendem
+
+        //1. Wyciąganie gifów
+
+        Gif gif = gifRepository.getGifByName(name);
+
+        //2. Przekazywanie gifa do View
+        modelMap.put("gif", gif); // tu dokonaliśmy mapowania, na frontendzie szukamy $ - on zaznacza pobierane dane z BackEnd, dlatego wpisujemy "gifs" do mapy
+
+        //3. Zwracanie nazwy widoku
+        return "gif-details";
     }
 
 //    @ResponseBody

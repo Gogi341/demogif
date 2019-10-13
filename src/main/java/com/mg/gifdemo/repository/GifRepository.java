@@ -3,6 +3,7 @@ package com.mg.gifdemo.repository;
 import com.mg.gifdemo.model.Gif;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,5 +20,24 @@ public class GifRepository {
 
     public static List<Gif> getGifs() {
         return ALL_GIFS;
+    }
+
+    public static List<Gif> getFavoriteGifs() {
+        List<Gif> favorites = new ArrayList<>();
+        for (int i = 0; i< ALL_GIFS.size(); i++){
+            if (ALL_GIFS.get(i).getFavorite()){
+                favorites.add(ALL_GIFS.get(i));
+            }
+        }
+        return favorites;
+    }
+
+    public Gif getGifByName (String name){
+        for (Gif g: ALL_GIFS) {
+            if (g.getName().equals(name)) {
+                return g;
+            }
+        }
+        return null;
     }
 }
